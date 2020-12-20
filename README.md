@@ -9,3 +9,7 @@
 - Given open "{url}"
 - When "{pageName}":input
 - Then "{pageName}":assert
+
+## exec
+- docker-compose up --build
+- docker run -v "%cd%:/app" --workdir=/app -it --rm chrome sh ./mvnw clean install -Pdocker,chrome

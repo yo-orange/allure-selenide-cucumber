@@ -132,6 +132,22 @@
                     </argLine>
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <property>
+                            <name>chromeOptions.args</name>
+                            <value>${chromearg}</value>
+                        </property>
+                        <property>
+                            <name>selenide.browserSize</name>
+                            <value>1980x1000</value>
+                        </property>
+                        <property>
+                            <name>selenide.holdBrowserOpen</name>
+                            <value>false</value>
+                        </property>
+                        <property>
+                            <name>selenide.headless</name>
+                            <value>true</value>
+                        </property>
                     </systemPropertyVariables>
                 </configuration>
                 <dependencies>
@@ -149,4 +165,23 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>docker</id>
+        </profile>
+        <profile>
+            <id>chrome</id>
+            <properties>
+                <selenide.browser>CHROME</selenide.browser>
+                <chromearg>--headless,--disable-gpu,--disable-extensions,disable-infobars,--disable-dev-shm-usage,--start-fullscreen,--incognito,--start-maximized,--no-sandbox</chromearg>
+            </properties>
+        </profile>
+    </profiles>
 </project>

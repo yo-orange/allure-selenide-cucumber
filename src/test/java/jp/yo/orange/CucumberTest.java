@@ -1,5 +1,6 @@
 package jp.yo.orange;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -13,6 +14,7 @@ public class CucumberTest {
 
     @BeforeClass
     public static void setup() {
+        // Configuration
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
     }
 }

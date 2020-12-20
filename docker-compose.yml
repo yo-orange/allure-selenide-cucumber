@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  chrome:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.chrome
+    image: chrome
+    container_name: chrome
+    volumes:
+      - ./:/app
+    working_dir: /app
