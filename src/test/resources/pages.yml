@@ -1,0 +1,8 @@
+pages:
+  - name: "Amazon Top"
+    items:
+      - { name: "Search Input Area", type: "input",  css: "#twotabsearchtextbox"}
+      - { name: "Search Submit",     type: "button", css: "input[type='submit']"}
+  - name: "Amazon Search Result"
+    items:
+      - { name: "First Item", type: "text",  css: "h2:nth-child(1)"}
