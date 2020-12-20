@@ -1,7 +1,14 @@
 package jp.yo.orange.util;
 
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.Keys;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+
+import javax.imageio.ImageIO;
+import java.io.ByteArrayOutputStream;
 
 public class SelenideUtils {
 
@@ -10,6 +17,11 @@ public class SelenideUtils {
     private SelenideUtils() {
     }
 
+    /**
+     * clear input field.
+     *
+     * @param element
+     */
     public static void clear(SelenideElement element) {
         if (isMac()) {
             element.sendKeys(Keys.chord(Keys.COMMAND, "a"));
@@ -17,6 +29,21 @@ public class SelenideUtils {
             element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
         }
         element.sendKeys(Keys.DELETE);
+    }
+
+    /**
+     * screenshot.
+     *
+     * @return
+     * @throws Exception
+     */
+    public static byte[] screenshot() throws Exception {
+        Screenshot screenshot = new AShot()
+                .shootingStrategy(ShootingStrategies.viewportPasting(1000))
+                .takeScreenshot(WebDriverRunner.getWebDriver());
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(screenshot.getImage(), "png", baos);
+        return baos.toByteArray();
     }
 
     public static boolean isWindows() {
