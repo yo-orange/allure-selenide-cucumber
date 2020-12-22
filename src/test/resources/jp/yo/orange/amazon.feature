@@ -4,7 +4,7 @@ Feature: Amazon
     Given open "https://www.amazon.co.jp/"
     And screenshot "Amazon Top"
     When "Amazon Top":input
-      | Search Input Area | PS4 |
+      | Search Input Area | PlayStation 4 ジェット・ブラック 500GB |
       | Search Submit     |     |
     And screenshot "Amazon Search Result"
     Then "Amazon Search Result":assert
