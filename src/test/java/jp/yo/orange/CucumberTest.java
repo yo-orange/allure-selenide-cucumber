@@ -1,6 +1,5 @@
 package jp.yo.orange;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;

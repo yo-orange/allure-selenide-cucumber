@@ -3,7 +3,8 @@ package jp.yo.orange.page;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.common.collect.Maps;
-import jp.yo.orange.type.*;
+import jp.yo.orange.type.AbstractType;
+import org.reflections.Reflections;
 
 import java.util.Map;
 
@@ -25,29 +26,25 @@ public class PagesFactory {
             return pagesType;
         }
 
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        PagesModel pagesModel = mapper.readValue(Thread.currentThread().getContextClassLoader().getResourceAsStream("./pages.yml"), PagesModel.class);
-        for (PageModel pageModel : pagesModel.getPages()) {
+        var reflections = new Reflections("jp.yo.orange.type");
+        var abstractTypes = reflections.getSubTypesOf(AbstractType.class);
+
+        var mapper = new ObjectMapper(new YAMLFactory());
+        var pagesModel = mapper.readValue(Thread.currentThread().getContextClassLoader().getResourceAsStream("./pages.yml"), PagesModel.class);
+        for (var pageModel : pagesModel.getPages()) {
             Map<String, AbstractType> types = Maps.newHashMap();
             pagesType.put(pageModel.getName(), types);
-            for (ItemModel itemModel : pageModel.getItems()) {
-                switch (itemModel.getType()) {
-                    case "input":
-                        types.put(itemModel.getName(), new InputTextType(itemModel));
-                        break;
-                    case "text":
-                        types.put(itemModel.getName(), new TextType(itemModel));
-                        break;
-                    case "select":
-                        types.put(itemModel.getName(), new SelectType(itemModel));
-                        break;
-                    case "button":
-                        types.put(itemModel.getName(), new ButtonType(itemModel));
-                        break;
-                    default:
-                        throw new RuntimeException(itemModel.toString());
-                }
+            for (var itemModel : pageModel.getItems()) {
+                var type = itemModel.getType();
+                var typeName = type.substring(0, 1).toUpperCase() + type.substring(1) + "Type";
 
+                var target = abstractTypes.stream()
+                        .filter(clazz -> clazz.getSimpleName().equals(typeName))
+                        .findFirst();
+                if (!target.isPresent()) {
+                    continue;
+                }
+                types.put(itemModel.getName(), target.get().getDeclaredConstructor(ItemModel.class).newInstance(itemModel));
             }
         }
         return pagesType;

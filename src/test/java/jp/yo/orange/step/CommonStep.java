@@ -7,7 +7,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.qameta.allure.Allure;
 import jp.yo.orange.page.PagesFactory;
-import jp.yo.orange.type.AbstractType;
 import jp.yo.orange.util.SelenideUtils;
 import jp.yo.orange.util.StepUtils;
 
@@ -17,17 +16,6 @@ import java.util.Map;
 
 public class CommonStep {
 
-//    private boolean isScreenshot = false;
-//
-//    @AfterStep
-//    public void afterStep(Scenario scenario) throws Exception {
-//        if (isScreenshot) {
-//            byte[] image = SelenideUtils.screenshot();
-//            scenario.attach(image, "image/png", scenario.getName() + ":afterStep");
-//            Allure.addAttachment(scenario.getName() + ":afterStep", new ByteArrayInputStream(image));
-//        }
-//    }
-
     /**
      * open browser.
      *
@@ -36,7 +24,6 @@ public class CommonStep {
     @Given("open {string}")
     public void open(String url) throws Exception {
         Selenide.open(url);
-        screenshot("open");
     }
 
     /**
@@ -48,12 +35,11 @@ public class CommonStep {
      */
     @When("{string}:input")
     public void input(String pageName, Map<String, String> data) throws Exception {
-        Map<String, Map<String, AbstractType>> pageTypes = PagesFactory.getInstance().getPagesType();
-        Map<String, AbstractType> items = pageTypes.get(pageName);
-        for (Map.Entry<String, String> value : data.entrySet()) {
+        var pageTypes = PagesFactory.getInstance().getPagesType();
+        var items = pageTypes.get(pageName);
+        for (var value : data.entrySet()) {
             items.get(value.getKey()).input(StepUtils.convert(value.getValue()));
         }
-        screenshot(pageName + ":input");
     }
 
     /**
@@ -65,16 +51,15 @@ public class CommonStep {
      */
     @Then("{string}:assert")
     public void assertElement(String pageName, Map<String, List<String>> data) throws Exception {
-        screenshot(pageName + ":assert");
-        Map<String, Map<String, AbstractType>> pageTypes = PagesFactory.getInstance().getPagesType();
-        Map<String, AbstractType> items = pageTypes.get(pageName);
-        for (Map.Entry<String, List<String>> value : data.entrySet()) {
+        var pageTypes = PagesFactory.getInstance().getPagesType();
+        var items = pageTypes.get(pageName);
+        for (var value : data.entrySet()) {
             items.get(value.getKey()).assertElement(value.getValue().get(0), StepUtils.convert(value.getValue().get(1)));
         }
     }
 
     /**
-     * screen shot.
+     * screenshot.
      *
      * @param imageName
      */
@@ -84,11 +69,13 @@ public class CommonStep {
     }
 
     /**
+     * screenshot.
+     *
      * @param imageName
      * @throws Exception
      */
     public void screenshot(String imageName) throws Exception {
-        byte[] image = SelenideUtils.screenshot();
+        var image = SelenideUtils.screenshot();
         Allure.addAttachment(imageName, new ByteArrayInputStream(image));
     }
 }

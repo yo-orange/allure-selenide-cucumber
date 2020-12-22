@@ -48,7 +48,6 @@ public abstract class AbstractType {
                 }
                 break;
             default:
-                log.warn("Not supported: attr:{}, value:{}", attribute, value);
                 getElement().shouldHave(Condition.attribute(attribute, value));
                 break;
         }

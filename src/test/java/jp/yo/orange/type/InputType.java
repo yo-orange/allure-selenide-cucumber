@@ -1,18 +1,17 @@
 package jp.yo.orange.type;
 
-import com.codeborne.selenide.SelenideElement;
 import jp.yo.orange.page.ItemModel;
 import jp.yo.orange.util.SelenideUtils;
 
-public class InputTextType extends AbstractType {
+public class InputType extends AbstractType {
 
-    public InputTextType(final ItemModel itemModel) {
+    public InputType(final ItemModel itemModel) {
         super(itemModel);
     }
 
     @Override
     public void input(String value) {
-        SelenideElement element = getElement();
+        var element = getElement();
         SelenideUtils.clear(element);
         element.setValue(value);
     }

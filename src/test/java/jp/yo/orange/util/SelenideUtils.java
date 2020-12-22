@@ -4,7 +4,6 @@ import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.Keys;
 import ru.yandex.qatools.ashot.AShot;
-import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 import javax.imageio.ImageIO;
@@ -38,7 +37,7 @@ public class SelenideUtils {
      * @throws Exception
      */
     public static byte[] screenshot() throws Exception {
-        Screenshot screenshot = new AShot()
+        var screenshot = new AShot()
                 .shootingStrategy(ShootingStrategies.viewportPasting(1000))
                 .takeScreenshot(WebDriverRunner.getWebDriver());
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
