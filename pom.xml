@@ -148,22 +148,10 @@
                     </argLine>
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
-                        <property>
-                            <name>chromeOptions.args</name>
-                            <value>${chromearg}</value>
-                        </property>
-                        <property>
-                            <name>selenide.browserSize</name>
-                            <value>1980x1000</value>
-                        </property>
-                        <property>
-                            <name>selenide.holdBrowserOpen</name>
-                            <value>false</value>
-                        </property>
-                        <property>
-                            <name>selenide.headless</name>
-                            <value>true</value>
-                        </property>
+                        <chromeOptions.args>${chromearg}</chromeOptions.args>
+                        <selenide.headless>true</selenide.headless>
+                        <selenide.browserSize>1980x1000</selenide.browserSize>
+                        <selenide.holdBrowserOpen>false</selenide.holdBrowserOpen>
                     </systemPropertyVariables>
                 </configuration>
                 <dependencies>

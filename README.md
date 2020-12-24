@@ -11,5 +11,7 @@
 - Then "{pageName}":assert
 
 ## exec
-- docker-compose up --build
+- docker-compose build
+- docker-compose up -d
+- docker exec -it chrome /bin/bash
 - docker run -v "%cd%:/app" --workdir=/app -it --rm chrome sh ./mvnw clean install -Pdocker,chrome

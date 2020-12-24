@@ -2,4 +2,8 @@ FROM centos:centos8
 COPY ./docker/google-chrome.repo /etc/yum.repos.d/
 RUN dnf install -y google-chrome-stable
 RUN dnf install -y java-11-openjdk
+RUN dnf install -y langpacks-ja && \
+    dnf install -y google-noto-cjk-fonts-common google-noto-sans-cjk-ttc-fonts google-noto-serif-cjk-ttc-fonts && \
+    fc-cache -fv
+
 CMD ["/bin/bash"]
