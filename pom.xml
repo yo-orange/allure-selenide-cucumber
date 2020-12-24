@@ -149,9 +149,11 @@
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                         <chromeOptions.args>${chromearg}</chromeOptions.args>
+                        <firefoxOptions.args>${firefoxarg}</firefoxOptions.args>
                         <selenide.headless>true</selenide.headless>
                         <selenide.browserSize>1980x1000</selenide.browserSize>
                         <selenide.holdBrowserOpen>false</selenide.holdBrowserOpen>
+                        <selenide.browser>${selenide.browser}</selenide.browser>
                     </systemPropertyVariables>
                 </configuration>
                 <dependencies>
@@ -176,6 +178,9 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <selenide.browser>chrome</selenide.browser>
+            </properties>
         </profile>
         <profile>
             <id>docker</id>
@@ -183,8 +188,17 @@
         <profile>
             <id>chrome</id>
             <properties>
-                <selenide.browser>CHROME</selenide.browser>
-                <chromearg>--headless,--disable-gpu,--disable-extensions,disable-infobars,--disable-dev-shm-usage,--start-fullscreen,--incognito,--start-maximized,--no-sandbox</chromearg>
+                <selenide.browser>chrome</selenide.browser>
+                <chromearg>
+                    --headless,--disable-gpu,--disable-extensions,disable-infobars,--disable-dev-shm-usage,--start-fullscreen,--incognito,--start-maximized,--no-sandbox
+                </chromearg>
+            </properties>
+        </profile>
+        <profile>
+            <id>firefox</id>
+            <properties>
+                <selenide.browser>firefox</selenide.browser>
+                <firefoxarg>--no-sandbox,-headless,--disable-gpu,--disable-dev-shm-usage</firefoxarg>
             </properties>
         </profile>
     </profiles>

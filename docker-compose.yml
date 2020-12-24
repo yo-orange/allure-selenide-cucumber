@@ -11,3 +11,13 @@ services:
       - ./:/app
     working_dir: /app
     tty: true
+  firefox:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.firefox
+    image: firefox
+    container_name: firefox
+    volumes:
+      - ./:/app
+    working_dir: /app
+    tty: true

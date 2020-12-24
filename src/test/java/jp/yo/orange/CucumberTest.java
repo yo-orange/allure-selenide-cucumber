@@ -5,7 +5,6 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -17,15 +16,15 @@ public class CucumberTest {
 
     @BeforeClass
     public static void setup() {
+//        ChromeOptions;
+//        FirefoxOptions;
         log.info("headless : {}", Configuration.headless);
-        log.info("properties: {}", ToStringBuilder.reflectionToString(System.getProperties()));
+        log.info("browser : {}", Configuration.browser);
         // Configuration
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
     }
 
     @AfterClass
     public static void afterClass() {
-        log.info("headless : {}", Configuration.headless);
-        log.info("properties: {}", ToStringBuilder.reflectionToString(System.getProperties()));
     }
 }

@@ -1,0 +1,20 @@
+FROM centos:centos8
+RUN dnf install -y wget && \
+    dnf install -y bzip2 && \
+    dnf install -y which && \
+    dnf install -y dbus-glib && \
+    dnf install -y Xvfb && \
+    dnf install -y libX11-xcb
+
+RUN wget --no-verbose -O /tmp/firefox.tar.bz2 "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=ja" && tar -jxvf /tmp/firefox.tar.bz2 -C /usr/local
+RUN echo "exclude=firefox" >> /etc/dnf/dnf.conf
+RUN ln -s /usr/local/firefox/firefox /usr/bin/firefox
+
+ARG GECKODRIVER_VERSION=0.28.0
+RUN wget --no-verbose -O /tmp/geckodriver.tar.gz "https://github.com/mozilla/geckodriver/releases/download/v$GECKODRIVER_VERSION/geckodriver-v$GECKODRIVER_VERSION-linux64.tar.gz" && tar -zxvf /tmp/geckodriver.tar.gz -C /usr/bin
+RUN dnf install -y java-11-openjdk
+RUN dnf install -y langpacks-ja && \
+    dnf install -y google-noto-cjk-fonts-common google-noto-sans-cjk-ttc-fonts google-noto-serif-cjk-ttc-fonts && \
+    fc-cache -fv
+
+CMD ["/bin/bash"]
