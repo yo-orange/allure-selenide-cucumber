@@ -16,8 +16,6 @@ public class CucumberTest {
 
     @BeforeClass
     public static void setup() {
-//        ChromeOptions;
-//        FirefoxOptions;
         log.info("headless : {}", Configuration.headless);
         log.info("browser : {}", Configuration.browser);
         // Configuration

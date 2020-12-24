@@ -21,3 +21,13 @@ services:
       - ./:/app
     working_dir: /app
     tty: true
+  edge:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.edge
+    image: edge
+    container_name: edge
+    volumes:
+      - ./:/app
+    working_dir: /app
+    tty: true

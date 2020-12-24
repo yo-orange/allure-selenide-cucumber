@@ -1,0 +1,12 @@
+FROM centos:centos8
+RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc && \
+    dnf install -y dnf-plugins-core && \
+    dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/edge && \
+    mv /etc/yum.repos.d/packages.microsoft.com_yumrepos_edge.repo /etc/yum.repos.d/microsoft-edge-dev.repo && \
+    dnf install -y microsoft-edge-dev
+RUN dnf install -y java-11-openjdk
+RUN dnf install -y langpacks-ja && \
+    dnf install -y google-noto-cjk-fonts-common google-noto-sans-cjk-ttc-fonts google-noto-serif-cjk-ttc-fonts && \
+    fc-cache -fv
+
+CMD ["/bin/bash"]

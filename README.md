@@ -21,3 +21,7 @@
 ### firefox
 - docker exec -it firefox /bin/bash
 - docker run -v "%cd%:/app" --workdir=/app -it --rm chrome sh ./mvnw clean install -Pdocker,firefox
+
+### edge
+- docker exec -it edge /bin/bash
+- ./mvnw clean install -Pdocker,edge

@@ -150,6 +150,7 @@
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                         <chromeOptions.args>${chromearg}</chromeOptions.args>
                         <firefoxOptions.args>${firefoxarg}</firefoxOptions.args>
+                        <edgeOptions>${edgearg}</edgeOptions>
                         <selenide.headless>true</selenide.headless>
                         <selenide.browserSize>1980x1000</selenide.browserSize>
                         <selenide.holdBrowserOpen>false</selenide.holdBrowserOpen>
@@ -199,6 +200,13 @@
             <properties>
                 <selenide.browser>firefox</selenide.browser>
                 <firefoxarg>--no-sandbox,-headless,--disable-gpu,--disable-dev-shm-usage</firefoxarg>
+            </properties>
+        </profile>
+        <profile>
+            <id>edge</id>
+            <properties>
+                <selenide.browser>edge</selenide.browser>
+                <edgearg>--allowed-ips,--headless,--disable-gpu,--disable-extensions,disable-infobars,--disable-dev-shm-usage,--start-fullscreen,--incognito,--start-maximized,--no-sandbox</edgearg>
             </properties>
         </profile>
     </profiles>
