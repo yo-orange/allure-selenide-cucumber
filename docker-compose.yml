@@ -31,3 +31,13 @@ services:
       - ./:/app
     working_dir: /app
     tty: true
+  android:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.android
+    image: android
+    container_name: android
+    volumes:
+      - ./:/app
+    working_dir: /app
+    tty: true

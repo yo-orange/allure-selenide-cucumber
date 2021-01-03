@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .allure
+HELP.md
 
 ### STS ###
 .apt_generated

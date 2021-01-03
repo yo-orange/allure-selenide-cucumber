@@ -1,0 +1,19 @@
+FROM centos:centos8
+RUN dnf install -y wget && \
+    dnf install -y bzip2 && \
+    dnf install -y unzip
+
+RUN dnf install -y java-11-openjdk
+RUN dnf install -y langpacks-ja && \
+    dnf install -y google-noto-cjk-fonts-common google-noto-sans-cjk-ttc-fonts google-noto-serif-cjk-ttc-fonts && \
+    fc-cache -fv
+
+RUN wget --no-verbose -O /tmp/commandlinetools-linux-6858069_latest.zip https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip && \
+    mkdir -p /android/sdk && \
+    unzip /tmp/commandlinetools-linux-6858069_latest.zip -d /android/sdk
+
+ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-11.0.9.11-2.el8_3.x86_64
+ENV ANDROID_HOME /android/sdk
+ENV PATH $ANDROID_HOME/platform-tools:$PATH
+
+CMD ["/bin/bash"]
