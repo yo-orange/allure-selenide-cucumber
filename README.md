@@ -16,6 +16,7 @@
 - docker-compose build
 - docker-compose up -d
 - docker exec -it chrome /bin/bash
+- docker exec -it chrome sh ./mvnw clean install -Pdocker,chrome
 - docker run -v "%cd%:/app" --workdir=/app -it --rm chrome sh ./mvnw clean install -Pdocker,chrome
 
 ### firefox

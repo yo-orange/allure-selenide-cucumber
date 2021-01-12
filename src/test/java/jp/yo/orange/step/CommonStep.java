@@ -1,11 +1,15 @@
 package jp.yo.orange.step;
 
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.qameta.allure.Allure;
+import io.qameta.allure.selenide.AllureSelenide;
 import jp.yo.orange.page.PagesFactory;
 import jp.yo.orange.util.SelenideUtils;
 import jp.yo.orange.util.StepUtils;
@@ -15,6 +19,11 @@ import java.util.List;
 import java.util.Map;
 
 public class CommonStep {
+
+    @Before
+    public void setup(Scenario scenario) {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
+    }
 
     /**
      * open browser.

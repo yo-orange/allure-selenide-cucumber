@@ -2,19 +2,18 @@ package jp.yo.orange;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
+import io.cucumber.junit.platform.engine.Cucumber;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 
 @lombok.extern.slf4j.Slf4j
-@RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources", plugin = {"pretty", "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm"}, monochrome = true)
+@Cucumber
+@CucumberOptions(plugin = {"io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm"})
 public class CucumberTest {
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         log.info("headless : {}", Configuration.headless);
         log.info("browser : {}", Configuration.browser);
@@ -22,7 +21,7 @@ public class CucumberTest {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
     }
 
-    @AfterClass
+    @AfterAll
     public static void afterClass() {
     }
 }
