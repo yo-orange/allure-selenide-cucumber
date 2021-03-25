@@ -41,3 +41,8 @@ services:
       - ./:/app
     working_dir: /app
     tty: true
+  chrome_standalone:
+    image: selenium/standalone-chrome:87.0
+    container_name: chrome_standalone
+    ports:
+      - "4444:4444"

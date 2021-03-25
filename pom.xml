@@ -216,5 +216,17 @@
                 <edgearg>--allowed-ips,--headless,--disable-gpu,--disable-extensions,disable-infobars,--disable-dev-shm-usage,--start-fullscreen,--incognito,--start-maximized,--no-sandbox</edgearg>
             </properties>
         </profile>
+        <profile>
+            <id>chrome_standalone</id>
+            <properties>
+                <selenide.browser>chrome</selenide.browser>
+                <chromearg>
+                    --headless,--disable-gpu,--disable-extensions,disable-infobars,--disable-dev-shm-usage,--start-fullscreen,--incognito,--start-maximized,--no-sandbox
+                </chromearg>
+            </properties>
+<!--            <systemPropertyVariables>-->
+<!--                <selenide.remote>http://localhost:4444</selenide.remote>-->
+<!--            </systemPropertyVariables>-->
+        </profile>
     </profiles>
 </project>

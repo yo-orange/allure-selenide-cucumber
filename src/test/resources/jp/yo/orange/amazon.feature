@@ -1,5 +1,6 @@
 Feature: Amazon
 
+  @issue=test @link=https://www.amazon.co.jp/
   Scenario: Purchase
     Given open "https://www.amazon.co.jp/"
     And screenshot "Amazon Top"
